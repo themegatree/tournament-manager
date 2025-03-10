@@ -7,8 +7,8 @@ class Player(
     var bbb: Int = 0, 
     var ccc: Int = 0, 
     var ddd: Int = 0, 
-    var op: List<String> = mutableListOf(), 
-    var opop: List<String> = mutableListOf())
+    var op: List<Player> = mutableListOf(), 
+    var opop: List<Player> = mutableListOf())
 
 fun outputAA(player: Player) {
     var sAA = player.aa.toString()
@@ -17,8 +17,8 @@ fun outputAA(player: Player) {
 }
 
 fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
-    playerOne.op += playerTwo.name
-    playerTwo.op += playerOne.name
+    playerOne.op += playerTwo
+    playerTwo.op += playerOne
 }
 
 fun updateOnGameWin(winner: Player, loser: Player) {
@@ -38,10 +38,10 @@ fun updateOnGameDraw(playerOne: Player, playerTwo: Player) {
 }
 
 fun updateOnRoundEnd(players: List<Player>) {
-    var total = 0
     for (player in players) {
-        total += 1
-    
+        for (op in player.op) {
+            player.opop += op.op
+        }    
     }
 }
 
@@ -62,4 +62,5 @@ fun main() {
     print("${player4.name}: ")
     outputAA(player4)
     updateOnRoundEnd(players)
+    println("${player1.op[0].name}, ${player1.opop[0].name}")
 }
