@@ -36,7 +36,7 @@ fun outputCCC(player: Player): String {
     return sCCC
 }
 
-fun outputDD(player: Player): String {
+fun outputDDD(player: Player): String {
     var sDDD = player.ddd.toString()
     sDDD = when(sDDD.length) {
         1 -> "00" + sDDD
@@ -47,8 +47,13 @@ fun outputDD(player: Player): String {
 }
 
 fun outputAABBBCCCDDD(player: Player) : String {
-    var tiebreaker = outputAA(player) + outputBBB(player) + outputCCC(player) + outputDD(player)
+    var tiebreaker = outputAA(player) + outputBBB(player) + outputCCC(player) + outputDDD(player)
     return tiebreaker
+}
+
+fun outputWLD(player: Player) : String {
+    var wld = "${player.w}/${player.l}/${player.d}"
+    return wld
 }
 
 fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
@@ -111,8 +116,8 @@ fun main() {
     var p2Tiebreaker = outputAABBBCCCDDD(player2)
     var p3Tiebreaker = outputAABBBCCCDDD(player3)
     var p4Tiebreaker = outputAABBBCCCDDD(player4)
-    println("${player1.name}: ${p1Tiebreaker}")
-    println("${player3.name}: ${p3Tiebreaker}")
-    println("${player2.name}: ${p2Tiebreaker}")
-    println("${player4.name}: ${p4Tiebreaker}")
+    println("${player1.name}:   ${player1.aa} " + outputWLD(player1) + " ${p1Tiebreaker}")
+    println("${player3.name}:    ${player3.aa} " + outputWLD(player3) + " ${p3Tiebreaker}")
+    println("${player2.name}: ${player2.aa} " + outputWLD(player2) + " ${p2Tiebreaker}")
+    println("${player4.name}:  ${player4.aa} " + outputWLD(player4) + " ${p4Tiebreaker}")
 }
