@@ -6,7 +6,7 @@ class Player(
     var aa: Int = 0, 
     var bbb: Int = 0, 
     var ccc: Int = 0, 
-    var dd: Int = 0, 
+    var ddd: Int = 0, 
     var op: List<Player> = mutableListOf(), 
     var opop: List<Player> = mutableListOf())
 
@@ -37,9 +37,18 @@ fun outputCCC(player: Player): String {
 }
 
 fun outputDD(player: Player): String {
-    var sDD = player.dd.toString()
-    sDD = if (sDD.length == 2) sDD else "0" + sDD
-    return sDD
+    var sDDD = player.ddd.toString()
+    sDDD = when(sDDD.length) {
+        1 -> "00" + sDDD
+        2 -> "0" + sDDD
+        else -> sDDD
+    }
+    return sDDD
+}
+
+fun outputAABBBCCCDDD(player: Player) : String {
+    var tiebreaker = outputAA(player) + outputBBB(player) + outputCCC(player) + outputDD(player)
+    return tiebreaker
 }
 
 fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
@@ -52,7 +61,7 @@ fun updateOnGameWin(winner: Player, loser: Player) {
     winner.w += 1;
     loser.l += 1;
     winner.aa += 3;
-    loser.dd += (loser.l + loser.d + loser.w)*(loser.l + loser.d + loser.w);
+    loser.ddd += (loser.l + loser.d + loser.w)*(loser.l + loser.d + loser.w);
 }
 
 fun updateOnGameDraw(playerOne: Player, playerTwo: Player) {
@@ -98,10 +107,10 @@ fun main() {
     updateOnGameWin(player1, player4)
     updateOnGameDraw(player2, player3)
     updateOnRoundEnd(players)
-    var p1Tiebreaker = outputAA(player1) + outputBBB(player1) + outputCCC(player1) + outputDD(player1)
-    var p2Tiebreaker = outputAA(player2) + outputBBB(player2) + outputCCC(player2) + outputDD(player2)
-    var p3Tiebreaker = outputAA(player3) + outputBBB(player3) + outputCCC(player3) + outputDD(player3)
-    var p4Tiebreaker = outputAA(player4) + outputBBB(player4) + outputCCC(player4) + outputDD(player4)
+    var p1Tiebreaker = outputAABBBCCCDDD(player1)
+    var p2Tiebreaker = outputAABBBCCCDDD(player2)
+    var p3Tiebreaker = outputAABBBCCCDDD(player3)
+    var p4Tiebreaker = outputAABBBCCCDDD(player4)
     println("${player1.name}: ${p1Tiebreaker}")
     println("${player3.name}: ${p3Tiebreaker}")
     println("${player2.name}: ${p2Tiebreaker}")
