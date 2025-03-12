@@ -16,34 +16,26 @@ fun outputAA(player: Player): String {
     return sAA
 }
 
-fun outputBBB(player: Player): String {
-    var sBBB = player.bbb.toString()
-    sBBB = when(sBBB.length) {
-        1 -> "00" + sBBB
-        2 -> "0" + sBBB
-        else -> sBBB
+fun outputXXX(iXXX: Int) : String {
+    var sXXX = iXXX.toString()
+    sXXX = when(sXXX.length) {
+        1 -> "00" + sXXX
+        2 -> "0" + sXXX
+        else -> sXXX
     }
-    return sBBB
+    return sXXX
+}
+
+fun outputBBB(player: Player): String {
+    return outputXXX(player.bbb)
 }
 
 fun outputCCC(player: Player): String {
-    var sCCC = player.ccc.toString()
-    sCCC = when(sCCC.length) {
-        1 -> "00" + sCCC
-        2 -> "0" + sCCC
-        else -> sCCC
-    }
-    return sCCC
+    return outputXXX(player.ccc)
 }
 
 fun outputDDD(player: Player): String {
-    var sDDD = player.ddd.toString()
-    sDDD = when(sDDD.length) {
-        1 -> "00" + sDDD
-        2 -> "0" + sDDD
-        else -> sDDD
-    }
-    return sDDD
+    return outputXXX(player.ddd)
 }
 
 fun outputAABBBCCCDDD(player: Player) : String {
@@ -52,8 +44,7 @@ fun outputAABBBCCCDDD(player: Player) : String {
 }
 
 fun outputWLD(player: Player) : String {
-    var wld = "${player.w}/${player.l}/${player.d}"
-    return wld
+    return "${player.w}/${player.l}/${player.d}"
 }
 
 fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
