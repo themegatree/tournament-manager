@@ -8,7 +8,25 @@ class Player(
     var ccc: Int = 0, 
     var ddd: Int = 0, 
     var op: List<Player> = mutableListOf(), 
-    var opop: List<Player> = mutableListOf())
+    var opop: List<Player> = mutableListOf()) {
+        
+        fun updateW() {
+            w += 1
+        }
+
+        fun updateD() {
+            d += 1
+        }
+
+        fun updateL() {
+            l += 1
+        }
+                
+        fun updateAA(toAdd: Int = 1) {
+            aa += toAdd
+        }
+
+    }
 
 fun outputAA(player: Player): String {
     var sAA = player.aa.toString()
@@ -54,18 +72,18 @@ fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
 
 fun updateOnGameWin(winner: Player, loser: Player) {
     updateOnGameEnd(winner, loser)
-    winner.w += 1;
-    loser.l += 1;
-    winner.aa += 3;
-    loser.ddd += (loser.l + loser.d + loser.w)*(loser.l + loser.d + loser.w);
+    winner.updateW()
+    loser.updateL()
+    winner.updateAA(3)
+    loser.ddd += (loser.l + loser.d + loser.w)*(loser.l + loser.d + loser.w)
 }
 
 fun updateOnGameDraw(playerOne: Player, playerTwo: Player) {
     updateOnGameEnd(playerOne, playerTwo)
-    playerOne.d += 1
-    playerTwo.d += 1
-    playerOne.aa += 1
-    playerTwo.aa += 1
+    playerOne.updateD()
+    playerTwo.updateD()
+    playerOne.updateAA()
+    playerTwo.updateAA()
 }
 
 fun calculateAvgWinRate(opponents: List<Player>): Int {
