@@ -1,3 +1,5 @@
+package com.themegatree
+
 class Player(
     var name: String,
     var w: Int = 0,
