@@ -38,10 +38,13 @@ class Player(var inputName: String) {
 
     fun outputWLD() : String {return "$w/$l/$d"}
 
-    fun updateW() {w += 1}
-    fun updateD() {d += 1}
-    fun updateL() {l += 1}
-    fun updateAA(toAdd: Int = 1) {aa += toAdd}
+    fun updateW(num: Int) {this.w += num}
+    fun updateD(num: Int) {this.d += num}
+    fun updateL(num: Int) {this.l += num}
+    fun updateAA(num: Int = 1) {this.aa += num}
+    fun updateBBB(num: Int) {this.bbb = num}
+    fun updateCCC(num: Int) {this.ccc = num}
+    fun updateDDD(num: Int) {this.ddd += num}
     
 }
 
@@ -62,14 +65,8 @@ fun outputXXX(iXXX: Int) : String {
 }
 
 fun outputBBB(player: Player): String {return outputXXX(player.bbb)}
-
-fun outputCCC(player: Player): String {
-    return outputXXX(player.ccc)
-}
-
-fun outputDDD(player: Player): String {
-    return outputXXX(player.ddd)
-}
+fun outputCCC(player: Player): String {return outputXXX(player.ccc)}
+fun outputDDD(player: Player): String {return outputXXX(player.ddd)}
 
 fun outputAABBBCCCDDD(player: Player) : String {
     val tiebreaker = outputAA(player) + outputBBB(player) + outputCCC(player) + outputDDD(player)
@@ -88,16 +85,16 @@ fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
 
 fun updateOnGameWin(winner: Player, loser: Player) {
     updateOnGameEnd(winner, loser)
-    winner.updateW()
-    loser.updateL()
+    winner.updateW(1)
+    loser.updateL(1)
     winner.updateAA(3)
     loser.ddd += (loser.l + loser.d + loser.w)*(loser.l + loser.d + loser.w)
 }
 
 fun updateOnGameDraw(playerOne: Player, playerTwo: Player) {
     updateOnGameEnd(playerOne, playerTwo)
-    playerOne.updateD()
-    playerTwo.updateD()
+    playerOne.updateD(1)
+    playerTwo.updateD(1)
     playerOne.updateAA()
     playerTwo.updateAA()
 }
@@ -143,4 +140,9 @@ fun main() {
     println("${player3.outputName()}:    ${player3.aa} " + player3.outputWLD() + " $p3Tiebreaker")
     println("${player2.outputName()}: ${player2.aa} " + player2.outputWLD() + " $p2Tiebreaker")
     println("${player4.outputName()}:  ${player4.aa} " + player4.outputWLD() + " $p4Tiebreaker")
+
+    val testplayer = Player("Lulu")
+    testplayer.updateW(1)
+    println(testplayer.outputW())
+
 }
