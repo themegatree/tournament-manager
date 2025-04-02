@@ -1,37 +1,48 @@
 package com.themegatree
 
-class Player(
-    var name: String,
-    var w: Int = 0,
-    var d: Int = 0,
-    var l: Int = 0,
-    var aa: Int = 0,
-    var bbb: Int = 0,
-    var ccc: Int = 0,
-    var ddd: Int = 0,
-    var op: List<Player> = mutableListOf(),
-    var opop: List<Player> = mutableListOf()) {
+class Player(var inputName: String) {
 
-    fun updateW() {
-        w += 1
+    val name: String
+    var w: Int
+    var d: Int
+    var l: Int
+    var aa: Int
+    var bbb: Int
+    var ccc: Int
+    var ddd: Int
+    var op: List<Player>
+    var opop: List<Player>
+
+    init {
+        name = inputName
+        w = 0
+        d = 0
+        l = 0
+        aa = 0
+        bbb = 0
+        ccc = 0
+        ddd = 0 
+        op =  mutableListOf()
+        opop =  mutableListOf()
     }
 
-    fun updateD() {
-        d += 1
-    }
+    fun outputName() : String {return this.name}
+    fun outputW() : Int {return this.w}
+    fun outputD() : Int {return this.d}
+    fun outputL() : Int {return this.l}
+    fun outputAA() : Int {return this.aa}
+    fun outputBBB() : Int {return this.bbb}
+    fun outputCCC() : Int {return this.ccc}
+    fun outputDDD() : Int {return this.ddd}
 
-    fun updateL() {
-        l += 1
-    }
 
-    fun outputWLD() : String {
-        return "$w/$l/$d"
-    }
+    fun outputWLD() : String {return "$w/$l/$d"}
 
-    fun updateAA(toAdd: Int = 1) {
-        aa += toAdd
-    }
-
+    fun updateW() {w += 1}
+    fun updateD() {d += 1}
+    fun updateL() {l += 1}
+    fun updateAA(toAdd: Int = 1) {aa += toAdd}
+    
 }
 
 fun outputAA(player: Player): String {
@@ -50,9 +61,7 @@ fun outputXXX(iXXX: Int) : String {
     return sXXX
 }
 
-fun outputBBB(player: Player): String {
-    return outputXXX(player.bbb)
-}
+fun outputBBB(player: Player): String {return outputXXX(player.bbb)}
 
 fun outputCCC(player: Player): String {
     return outputXXX(player.ccc)
@@ -130,8 +139,8 @@ fun main() {
     val p2Tiebreaker = outputAABBBCCCDDD(player2)
     val p3Tiebreaker = outputAABBBCCCDDD(player3)
     val p4Tiebreaker = outputAABBBCCCDDD(player4)
-    println("${player1.name}:   ${player1.aa} " + player1.outputWLD() + " $p1Tiebreaker")
-    println("${player3.name}:    ${player3.aa} " + player3.outputWLD() + " $p3Tiebreaker")
-    println("${player2.name}: ${player2.aa} " + player2.outputWLD() + " $p2Tiebreaker")
-    println("${player4.name}:  ${player4.aa} " + player4.outputWLD() + " $p4Tiebreaker")
+    println("${player1.outputName()}:   ${player1.aa} " + player1.outputWLD() + " $p1Tiebreaker")
+    println("${player3.outputName()}:    ${player3.aa} " + player3.outputWLD() + " $p3Tiebreaker")
+    println("${player2.outputName()}: ${player2.aa} " + player2.outputWLD() + " $p2Tiebreaker")
+    println("${player4.outputName()}:  ${player4.aa} " + player4.outputWLD() + " $p4Tiebreaker")
 }
