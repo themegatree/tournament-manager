@@ -40,7 +40,7 @@ class Player (var inputName: String) {
     fun updateW(num: Int) {this.w += num}
     fun updateD(num: Int) {this.d += num}
     fun updateL(num: Int) {this.l += num}
-    fun updateAA(num: Int = 1) {this.aa += num}
+    fun updateAA(num: Int) {this.aa += num}
     fun updateBBB(num: Int) {this.bbb = num}
     fun updateCCC(num: Int) {this.ccc = num}
     fun updateDDD(num: Int) {this.ddd += num}
@@ -77,6 +77,11 @@ fun createPairs(players: List<Player>): List<List<Player>> {
     return pairs
 }
 
+fun orderPlayers(players: List<Player>): List<Player> {
+    val orderedPlayers = players.sortedBy { it.aa }
+    return orderedPlayers
+}
+
 fun updateOnGameEnd(playerOne: Player, playerTwo: Player) {
     playerOne.op += playerTwo
     playerTwo.op += playerOne
@@ -94,8 +99,8 @@ fun updateOnGameDraw(playerOne: Player, playerTwo: Player) {
     updateOnGameEnd(playerOne, playerTwo)
     playerOne.updateD(1)
     playerTwo.updateD(1)
-    playerOne.updateAA()
-    playerTwo.updateAA()
+    playerOne.updateAA(1)
+    playerTwo.updateAA(1)
 }
 
 fun calculateAvgWinRate(opponents: List<Player>): Int {
@@ -124,12 +129,13 @@ fun main() {
     val player3 = Player("Cat")
     val player4 = Player("Curie")
     val players = mutableListOf(player1, player2, player3, player4)
-    val pairs = createPairs(players)
+    var pairs = createPairs(players)
     updateOnGameWin(pairs[0][0], pairs[0][1])
     updateOnGameWin(pairs[1][0], pairs[1][1])
     updateOnRoundEnd(players)
-    updateOnGameWin(player1, player4)
-    updateOnGameDraw(player2, player3)
+    pairs = createPairs(orderPlayers(players))
+    updateOnGameDraw(pairs[0][1], pairs[0][1])
+    updateOnGameWin(pairs[1][0], pairs[1][1])
     updateOnRoundEnd(players)
     val p1Tiebreaker = outputAABBBCCCDDD(player1)
     val p2Tiebreaker = outputAABBBCCCDDD(player2)
@@ -137,8 +143,8 @@ fun main() {
     val p4Tiebreaker = outputAABBBCCCDDD(player4)
     println("${player1.outputName()}:   ${player1.aa} " + player1.outputWLD() + " $p1Tiebreaker")
     println("${player3.outputName()}:    ${player3.aa} " + player3.outputWLD() + " $p3Tiebreaker")
-    println("${player2.outputName()}: ${player2.aa} " + player2.outputWLD() + " $p2Tiebreaker")
     println("${player4.outputName()}:  ${player4.aa} " + player4.outputWLD() + " $p4Tiebreaker")
+    println("${player2.outputName()}: ${player2.aa} " + player2.outputWLD() + " $p2Tiebreaker")
 
     val testplayer = Player("Lulu")
     testplayer.updateW(1)
