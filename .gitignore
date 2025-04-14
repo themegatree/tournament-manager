@@ -30,3 +30,7 @@ replay_pid*
 
 # Ignore Gradle build output directory
 build
+
+
+# Idea Space
+.ideas/

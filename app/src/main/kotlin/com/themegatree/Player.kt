@@ -77,8 +77,8 @@ fun createPairs(players: List<Player>): List<List<Player>> {
     return pairs
 }
 
-fun orderPlayers(players: List<Player>): List<Player> {
-    val orderedPlayers = players.sortedBy { it.aa }
+fun List<Player>.orderPlayers(): List<Player> {
+    val orderedPlayers = sortedBy { it.aa }
     return orderedPlayers
 }
 
@@ -133,7 +133,7 @@ fun main() {
     updateOnGameWin(pairs[0][0], pairs[0][1])
     updateOnGameWin(pairs[1][0], pairs[1][1])
     updateOnRoundEnd(players)
-    pairs = createPairs(orderPlayers(players))
+    pairs = createPairs(players.orderPlayers())
     updateOnGameDraw(pairs[0][1], pairs[0][1])
     updateOnGameWin(pairs[1][0], pairs[1][1])
     updateOnRoundEnd(players)
