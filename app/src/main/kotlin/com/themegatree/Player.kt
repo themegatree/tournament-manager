@@ -72,13 +72,19 @@ fun outputAABBBCCCDDD(player: Player) : String {
     return tiebreaker
 }
 
+fun Player.outputTiebreaker(): Int {
+    val sTiebreaker = aa.toString() + bbb.toString() + ccc.toString() + ddd.toString()
+    val iTiebreaker = sTiebreaker.toInt()
+    return iTiebreaker
+}
+
 fun createPairs(players: List<Player>): List<List<Player>> {
     val pairs = players.chunked(2)
     return pairs
 }
 
 fun List<Player>.orderPlayers(): List<Player> {
-    val orderedPlayers = sortedBy { it.aa }
+    val orderedPlayers = sortedBy { it.outputTiebreaker() }
     return orderedPlayers
 }
 
